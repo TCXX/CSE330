@@ -6,6 +6,12 @@ $first = $_GET['firstnumber'];
 $second = $_GET['lastnumber'];
 $operation = $_GET['operation'];
 
+
+if($first=="" || $second=="" || $operation=="") {
+    printf("All fields required!");
+    exit();
+}else{
+
 switch($operation){
 	case "add":
 		$answer = $first + $second;
@@ -24,8 +30,8 @@ switch($operation){
 			$answer = $first / $second;
 			$string = "/";
 		}else{
-			$answer = 0;
-			$string = "";
+			printf("The second number cannot be zero!");
+			exit();
 		}
 		
 		break;
@@ -39,6 +45,8 @@ printf("<p>%d %s %d = %d </p>\n",
 	htmlentities($second),
 	$answer
 );
+
+}
 ?>
 </body>
 </html>
