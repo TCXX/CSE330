@@ -12,7 +12,7 @@ def readFile(inputFile):
     times = {}
     hits = {}
     #matching rules
-    valid_regex = re.compile(r"[A-Z][a-z]+\s[A-Z][a-z]+ batted \d+ times with \d+ hits and \d+ runs")
+    valid_regex = re.compile(r"[A-Z][A-Za-z]+ [A-Z][A-Za-z]+ batted \d+ times with \d+ hits and \d+ runs")
     name_regex = re.compile(r"[A-Z][A-Za-z]+ [A-Z][A-Za-z]+")
     number_regex = re.compile(r"\d+")
     
@@ -25,15 +25,15 @@ def readFile(inputFile):
                 #extract characters
                 player = name_regex.match(line).group(0)
                 number = number_regex.findall(line)
-                time=number[0]
-                hit=number[1]
+                time=int(number[0])
+                hit=int(number[1])
                 #populate data
                 if player in times:
-                    times[player] += int(time)
-                    hits[player] += int(hit)
+                    times[player] += time
+                    hits[player] += hit
                 else:
-                    times[player] = int(time)
-                    hits[player] = int(hit) 
+                    times[player] = time
+                    hits[player] = hit
     except IOError:
         sys.exit("IOE Error: Fail to open %s !" % inputFile)
     else:
